@@ -245,3 +245,44 @@ Before committing, verify:
 
 **Authentication:**
 - Auth implementation: Deferred to future phase
+
+### 3.7.1 TypeScript Configuration Constraints
+
+**Required Compiler Options:**
+- ✅ `strict: true` (mandatory)
+- ✅ `noUnusedLocals: true`
+- ✅ `noUnusedParameters: true`
+- ❌ `erasableSyntaxOnly` (FORBIDDEN - conflicts with error handling classes)
+
+**Path Mapping (Mandatory):**
+- MUST configure `@/` alias pointing to `src/` in both:
+  1. `tsconfig.app.json` (baseUrl + paths)
+  2. `vite.config.ts` (resolve.alias)
+- All imports MUST use `@/` prefix (e.g., `import { Product } from '@/types/api'`)
+- NEVER use relative imports across layers (e.g., `../../../types/api`)
+
+**Rationale:** 
+- Path aliases prevent layer boundary violations (easier to detect in code reviews)
+- `erasableSyntaxOnly` prevents proper error handling patterns (custom Error classes)
+
+
+### 3.8 Environment Variables
+
+**Required Files:**
+- `.env.development` (local development, gitignored)
+- `.env.example` (template, committed to git)
+- `.env.production` (production settings, managed separately)
+
+**Naming Convention:**
+- Vite variables MUST start with `VITE_` prefix
+- Backend API: `VITE_API_BASE_URL`
+- Example: `VITE_API_BASE_URL=http://localhost:8080`
+
+**Usage:**
+- Access via `import.meta.env.VITE_API_BASE_URL` (Vite-specific)
+- NEVER hardcode API URLs in code
+- HTTP client MUST read from environment variables
+
+**Git Policy:**
+- `.env.development` → IGNORED (local secrets)
+- `.env.example` → COMMITTED (template)
