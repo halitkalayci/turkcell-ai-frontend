@@ -286,3 +286,15 @@ Before committing, verify:
 **Git Policy:**
 - `.env.development` → IGNORED (local secrets)
 - `.env.example` → COMMITTED (template)
+
+## 4) CODING STANDARDS (QUALITY BAR)
+
+### 4.1) Simplicity
+
+- Prefer the simplest working solution.
+
+- Avoid over-engineering, unnecessary patterns, extra layers.
+
+### 4.2) COMMENT LINES
+
+- Do not add comment lines for all code blocks. Only use summaries for files and functions.
