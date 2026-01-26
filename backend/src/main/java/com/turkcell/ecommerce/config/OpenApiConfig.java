@@ -1,0 +1,27 @@
+package com.turkcell.ecommerce.config;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.servers.Server;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
+
+@Configuration
+public class OpenApiConfig {
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("Mini E-Commerce Products API")
+                        .version("1.0.0")
+                        .description("Contract-first Products CRUD API (v1)"))
+                .servers(List.of(
+                        new Server()
+                                .url("/api/v1")
+                                .description("API v1 Base URL")
+                ));
+    }
+}
