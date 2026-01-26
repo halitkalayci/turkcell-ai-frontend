@@ -37,11 +37,11 @@ export function ProductCard({ product }: ProductCardProps) {
     <article className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 border border-gray-200">
       {/* Product Header */}
       <div className="mb-4">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+        <h3 className="text-lg font-medium text-gray-900 mb-2">
           {product.name}
         </h3>
         {product.sku && (
-          <p className="text-sm text-gray-500">
+          <p className="text-xs text-gray-500">
             SKU: {product.sku}
           </p>
         )}
@@ -68,7 +68,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Stock Badge */}
         <div>
           {product.inStock ? (
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-50 text-green-600">
               <svg
                 className="w-4 h-4 mr-1"
                 fill="currentColor"
@@ -83,7 +83,7 @@ export function ProductCard({ product }: ProductCardProps) {
               In Stock
             </span>
           ) : (
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-50 text-red-600">
               <svg
                 className="w-4 h-4 mr-1"
                 fill="currentColor"

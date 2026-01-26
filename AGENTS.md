@@ -311,7 +311,28 @@ Before committing, verify:
 - Card: `bg-white rounded-lg shadow-md hover:shadow-lg`
 - Button: `bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg`
 
-### 3.10 React Hook Best Practices 
+### 3.10 UI Styling Requirements
+
+**Styling Source of Truth:**
+- ALL styling decisions MUST follow rules defined in `/docs/frontend/06-styleguide.md`
+- When implementing or modifying UI components, you MUST read the styleguide first
+- Tailwind CSS is MANDATORY - no custom CSS or inline styles allowed
+
+**Before Making Style Changes:**
+1. Read `/docs/frontend/06-styleguide.md` completely
+2. Follow color system rules (semantic colors only)
+3. Follow typography hierarchy strictly
+4. Never use hardcoded hex/rgb values
+5. Never introduce new color meanings without documentation
+
+**Code Review Checklist - Styling:**
+- [ ] All colors use semantic Tailwind classes (no hex/rgb)
+- [ ] Typography follows hierarchy (text-2xl for page titles, text-lg for cards, etc.)
+- [ ] No custom CSS files added
+- [ ] No inline styles used
+- [ ] Styleguide rules are followed
+
+### 3.11 React Hook Best Practices 
 **Memory Leak Prevention:**
 - ALL hooks with async operations MUST use cleanup pattern:
   ```typescript
@@ -336,7 +357,7 @@ Dependency Arrays:
 Primitive values only (string, number, boolean)
 Destructure object properties before using in deps
 NEVER pass entire objects (causes infinite loops)
-### 3.11 Utility Functions & Presentation Logic
+### 3.12 Utility Functions & Presentation Logic
 
 **FORBIDDEN in UI Layer:**
 - ❌ Business logic (price calculations, validations)

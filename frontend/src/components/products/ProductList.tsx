@@ -39,7 +39,7 @@ export function ProductList() {
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600"></div>
-        <p className="mt-4 text-gray-600 text-lg">Loading products...</p>
+        <p className="mt-4 text-gray-600 text-sm">Loading products...</p>
       </div>
     );
   }
@@ -62,10 +62,10 @@ export function ProductList() {
               />
             </svg>
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-red-900 mb-2">
+              <h3 className="text-lg font-medium text-red-900 mb-2">
                 Error Loading Products
               </h3>
-              <p className="text-red-700 mb-4">{error}</p>
+              <p className="text-red-600 mb-4">{error}</p>
               <button
                 onClick={refetch}
                 className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
@@ -96,7 +96,7 @@ export function ProductList() {
             d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
           />
         </svg>
-        <h3 className="text-xl font-semibold text-gray-700 mb-2">
+        <h3 className="text-lg font-medium text-gray-700 mb-2">
           No Products Found
         </h3>
         <p className="text-gray-500">
