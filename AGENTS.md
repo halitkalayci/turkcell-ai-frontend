@@ -3,7 +3,7 @@
 This repository contains a mini e-commerce ecosystem.
 
 - frontend tech stack: React, Vite, TS
-- backend tech stack: Spring (3.X), JAVA
+- backend tech stack: Spring (3.X), JAVA (21)
 
 ---
 
