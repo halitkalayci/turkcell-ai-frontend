@@ -14,6 +14,7 @@
 
 import type { Product } from '@/types/api';
 import { truncateText, formatPrice, formatDate } from '@/utils/formatters';
+import { MAX_DESCRIPTION_LENGTH } from '@/utils/constants';
 
 /**
  * ProductCard props
@@ -49,7 +50,7 @@ export function ProductCard({ product }: ProductCardProps) {
       {/* Product Description */}
       {product.description && (
         <p className="text-gray-700 mb-4 text-sm leading-relaxed">
-          {truncateText(product.description, 120)}
+          {truncateText(product.description, MAX_DESCRIPTION_LENGTH)}
         </p>
       )}
 

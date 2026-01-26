@@ -16,16 +16,8 @@ import { useState, useEffect } from 'react';
 import { productService } from '@/services/products.service';
 import type { Product, ProductPageResponse } from '@/types/api';
 import type { GetProductsOptions } from '@/services/products.service';
-
-/**
- * Pagination metadata
- */
-export interface PaginationInfo {
-  page: number;
-  size: number;
-  totalElements: number;
-  totalPages: number;
-}
+import type { PaginationInfo } from '@/types/common';
+import { transformErrorMessage } from '@/utils/error-handlers';
 
 /**
  * Hook return type
@@ -87,20 +79,8 @@ export function useProducts(options?: GetProductsOptions): UseProductsReturn {
         }
       } catch (err) {
         if (isMounted) {
-          // Transform technical errors to user-friendly messages
-          if (err instanceof Error) {
-            if (err.message.includes('Network error')) {
-              setError('Unable to connect to server. Please check your connection.');
-            } else if (err.message.includes('404')) {
-              setError('Products not found. Please try again later.');
-            } else if (err.message.includes('500')) {
-              setError('Server error. Please contact support.');
-            } else {
-              setError('Failed to load products. Please try again.');
-            }
-          } else {
-            setError('An unexpected error occurred.');
-          }
+          // Transform technical errors to user-friendly messages using utility
+          setError(transformErrorMessage(err, 'products'));
           // Clear data on error
           setProducts([]);
           setPagination(null);

@@ -15,6 +15,7 @@
 
 import { useProducts } from '@/hooks/useProducts';
 import { ProductCard } from './ProductCard';
+import { calculatePageStartIndex, calculatePageEndIndex } from '@/utils/pagination';
 
 /**
  * ProductList component displays paginated list of products
@@ -114,14 +115,11 @@ export function ProductList() {
           <p className="text-gray-600">
             Showing{' '}
             <span className="font-semibold text-gray-900">
-              {pagination.page * pagination.size + 1}
+              {calculatePageStartIndex(pagination.page, pagination.size)}
             </span>
             {' - '}
             <span className="font-semibold text-gray-900">
-              {Math.min(
-                (pagination.page + 1) * pagination.size,
-                pagination.totalElements
-              )}
+              {calculatePageEndIndex(pagination.page, pagination.size, pagination.totalElements)}
             </span>
             {' of '}
             <span className="font-semibold text-gray-900">

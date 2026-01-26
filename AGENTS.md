@@ -418,6 +418,68 @@ export function ProductCard({ product }: ProductCardProps) {
 - [ ] Utils are pure functions (no side effects)
 - [ ] Utils have no React/framework dependencies
 
+### 3.12 Constants & Magic Numbers
+
+**FORBIDDEN:**
+- ❌ Magic numbers in code (hardcoded values without explanation)
+- ❌ Duplicate constant values across files
+- ❌ Environment-specific values hardcoded in source
+
+**MANDATORY:**
+- ✅ ALL magic numbers MUST be defined in `src/utils/constants.ts`
+- ✅ Constants MUST have descriptive names (UPPER_SNAKE_CASE)
+- ✅ Constants MUST be grouped by category (API, UI, Validation, etc.)
+- ✅ Each constant MUST have a JSDoc comment explaining its purpose
+
+**Constant Categories:**
+
+1. **API Configuration:**
+   - `API_BASE_URL`, `API_TIMEOUT`
+
+2. **Pagination:**
+   - `DEFAULT_PAGE_SIZE`, `MIN_PAGE_SIZE`, `MAX_PAGE_SIZE`
+
+3. **Text Limits:**
+   - `MAX_DESCRIPTION_LENGTH`, `MAX_TITLE_LENGTH`
+
+4. **UI Timeouts:**
+   - `SEARCH_DEBOUNCE_DELAY`, `TOAST_DURATION`
+
+5. **Validation:**
+   - `MIN_PRODUCT_NAME_LENGTH`, `MIN_PRODUCT_PRICE`
+
+**Examples:**
+
+```typescript
+// ✅ CORRECT: Constant defined in utils/constants.ts
+export const MAX_DESCRIPTION_LENGTH = 120;
+
+// ✅ CORRECT: Component uses constant
+import { MAX_DESCRIPTION_LENGTH } from '@/utils/constants';
+
+export function ProductCard({ product }: ProductCardProps) {
+  return <p>{truncateText(product.description, MAX_DESCRIPTION_LENGTH)}</p>;
+}
+
+// ❌ WRONG: Magic number in component
+export function ProductCard({ product }: ProductCardProps) {
+  return <p>{truncateText(product.description, 120)}</p>;  // What is 120?
+}
+
+// ❌ WRONG: Duplicate constants
+// In ComponentA.tsx
+const MAX_LENGTH = 120;
+
+// In ComponentB.tsx  
+const MAX_LENGTH = 120;  // Duplicate! Should be in constants.ts
+```
+
+**Code Review Checklist:**
+- [ ] No magic numbers in code (except -1, 0, 1, 2 for obvious array/loop operations)
+- [ ] All configurable values in `src/utils/constants.ts`
+- [ ] Constants have descriptive names and JSDoc comments
+- [ ] No duplicate constant values across files
+
 ---
 ## 4) CODING STANDARDS (QUALITY BAR)
 
