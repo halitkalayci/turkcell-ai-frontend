@@ -336,7 +336,89 @@ Dependency Arrays:
 Primitive values only (string, number, boolean)
 Destructure object properties before using in deps
 NEVER pass entire objects (causes infinite loops)
+### 3.11 Utility Functions & Presentation Logic
 
+**FORBIDDEN in UI Layer:**
+- ❌ Business logic (price calculations, validations)
+- ❌ Data transformations (API response mapping)
+- ❌ Reusable formatting logic (truncate, formatPrice, formatDate)
+- ❌ Domain logic disguised as "helpers"
+
+**ALLOWED in UI Layer:**
+- ✅ JSX rendering only
+- ✅ Event handlers that delegate to hooks
+- ✅ Component-specific render helpers (e.g., `renderStockBadge()` used only in that component)
+- ✅ Simple inline conditionals for className or styles
+
+**MANDATORY Rules:**
+
+1. **Reusable Logic → `src/utils/`:**
+   - `formatters.ts` (formatPrice, formatDate, truncateText)
+   - `validators.ts` (isValidEmail, isValidPrice)
+   - `constants.ts` (API_BASE_URL, MAX_DESCRIPTION_LENGTH)
+
+2. **Component-Specific Helpers:**
+   - Keep simple render logic inside component if used ONLY once
+   - Extract to utils/ if used in multiple components
+   - Prefix with `render` for JSX fragments (e.g., `renderHeader()`)
+
+3. **Utils Layer Characteristics:**
+   - Pure functions (no side effects)
+   - Framework-agnostic (no React imports)
+   - Easily testable in isolation
+   - No state management
+
+**Examples:**
+
+```typescript
+// ✅ CORRECT: Utility in utils/formatters.ts
+export function formatPrice(price: number, currency: string): string {
+  return `${price.toFixed(2)} ${currency}`;
+}
+
+// ✅ CORRECT: Component imports utility
+import { formatPrice } from '@/utils/formatters';
+
+export function ProductCard({ product }: ProductCardProps) {
+  return <span>{formatPrice(product.price, product.currency)}</span>;
+}
+
+// ✅ CORRECT: Component-specific helper (used only here)
+export function ProductCard({ product }: ProductCardProps) {
+  const renderStockBadge = () => (
+    <span className={product.inStock ? 'badge-green' : 'badge-red'}>
+      {product.inStock ? 'In Stock' : 'Out of Stock'}
+    </span>
+  );
+  
+  return <div>{renderStockBadge()}</div>;
+}
+
+// ❌ WRONG: Reusable utility defined in component
+export function ProductCard({ product }: ProductCardProps) {
+  function formatPrice(price: number, currency: string): string {
+    return `${price.toFixed(2)} ${currency}`;  // Should be in utils/
+  }
+  
+  return <span>{formatPrice(product.price, product.currency)}</span>;
+}
+
+// ❌ WRONG: Business logic in component
+export function ProductCard({ product }: ProductCardProps) {
+  const discountedPrice = product.price * 0.9;  // Business logic!
+  return <span>{discountedPrice}</span>;  // Should be in service layer
+}
+```
+
+**Code Review Checklist:**
+- [ ] No business logic in UI components
+- [ ] Formatting functions in `src/utils/formatters.ts`
+- [ ] Validation functions in `src/utils/validators.ts`
+- [ ] No duplicate utility functions across components
+- [ ] Utils are pure functions (no side effects)
+- [ ] Utils have no React/framework dependencies
+
+---
 ## 4) CODING STANDARDS (QUALITY BAR)
 
 ### 4.1) Simplicity

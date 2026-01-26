@@ -13,6 +13,7 @@
  */
 
 import type { Product } from '@/types/api';
+import { truncateText, formatPrice, formatDate } from '@/utils/formatters';
 
 /**
  * ProductCard props
@@ -20,21 +21,6 @@ import type { Product } from '@/types/api';
 export interface ProductCardProps {
   /** Product data to display */
   product: Product;
-}
-
-/**
- * Truncate text with ellipsis
- */
-function truncate(text: string | null | undefined, maxLength: number): string {
-  if (!text) return '';
-  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
-}
-
-/**
- * Format price with currency
- */
-function formatPrice(price: number, currency: string): string {
-  return `${price.toFixed(2)} ${currency}`;
 }
 
 /**
@@ -63,7 +49,7 @@ export function ProductCard({ product }: ProductCardProps) {
       {/* Product Description */}
       {product.description && (
         <p className="text-gray-700 mb-4 text-sm leading-relaxed">
-          {truncate(product.description, 120)}
+          {truncateText(product.description, 120)}
         </p>
       )}
 
@@ -74,7 +60,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {formatPrice(product.price, product.currency)}
           </span>
           <span className="text-xs text-gray-500 mt-1">
-            Updated: {new Date(product.updatedAt).toLocaleDateString()}
+            Updated: {formatDate(product.updatedAt)}
           </span>
         </div>
 
