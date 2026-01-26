@@ -60,7 +60,7 @@ export interface ProductPageResponse {
  * Query parameters for listing products
  * OpenAPI: paths./products.get.parameters
  */
-export interface ListProductsParams {
+export interface ListProductsParams extends Record<string, string | number | undefined> {
   /** Zero-based page index (default: 0) */
   page?: number;
   /** Page size (1-100, default: 10) */

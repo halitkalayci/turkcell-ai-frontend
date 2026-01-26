@@ -287,6 +287,56 @@ Before committing, verify:
 - `.env.development` → IGNORED (local secrets)
 - `.env.example` → COMMITTED (template)
 
+
+### 3.9 Styling with Tailwind CSS
+
+**Configuration Files Required:**
+- `tailwind.config.js` - Tailwind configuration with content paths
+- `postcss.config.js` - PostCSS with Tailwind and Autoprefixer plugins
+- `index.css` - Import Tailwind directives (@tailwind base/components/utilities)
+
+**Installation:**
+- Tailwind CSS: `tailwindcss`
+- PostCSS: `postcss`
+- Autoprefixer: `autoprefixer`
+
+**Usage:**
+- Use Tailwind utility classes directly in JSX
+- NO CSS modules or styled-components
+- Responsive design with Tailwind breakpoints (sm, md, lg)
+- Component styling stays in JSX (no separate CSS files per component)
+
+**Examples:**
+- Grid: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`
+- Card: `bg-white rounded-lg shadow-md hover:shadow-lg`
+- Button: `bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg`
+
+### 3.10 React Hook Best Practices 
+**Memory Leak Prevention:**
+- ALL hooks with async operations MUST use cleanup pattern:
+  ```typescript
+  useEffect(() => {
+    let isMounted = true;
+    // async operations...
+    if (isMounted) setState(...);
+    return () => { isMounted = false; };
+  }, [deps]);```
+
+Error Message Transformation:
+
+NEVER expose raw API errors to users
+Transform technical errors to user-friendly messages
+Map HTTP status codes to actionable messages
+Refetch Pattern:
+
+Use state-based trigger (refetchTrigger counter)
+Avoid callback dependencies in useEffect
+Dependency Arrays:
+
+Primitive values only (string, number, boolean)
+Destructure object properties before using in deps
+NEVER pass entire objects (causes infinite loops)
+
 ## 4) CODING STANDARDS (QUALITY BAR)
 
 ### 4.1) Simplicity
