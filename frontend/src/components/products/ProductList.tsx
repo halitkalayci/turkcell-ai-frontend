@@ -68,7 +68,7 @@ export function ProductList() {
               <p className="text-red-600 mb-4">{error}</p>
               <button
                 onClick={refetch}
-                className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
               >
                 Try Again
               </button>
@@ -99,7 +99,7 @@ export function ProductList() {
         <h3 className="text-lg font-medium text-gray-700 mb-2">
           No Products Found
         </h3>
-        <p className="text-gray-500">
+        <p className="text-sm text-gray-500">
           There are no products available at the moment.
         </p>
       </div>
@@ -112,7 +112,7 @@ export function ProductList() {
       {/* Pagination Info */}
       {pagination && (
         <div className="mb-6 flex items-center justify-between">
-          <p className="text-gray-600">
+          <p className="text-sm text-gray-600">
             Showing{' '}
             <span className="font-semibold text-gray-900">
               {calculatePageStartIndex(pagination.page, pagination.size)}
@@ -159,7 +159,7 @@ export function ProductList() {
 
       {/* Pagination Info (Bottom) */}
       {pagination && pagination.totalPages > 1 && (
-        <div className="mt-8 text-center text-gray-500 text-sm">
+        <div className="mt-8 text-center text-xs text-gray-500">
           Page {pagination.page + 1} of {pagination.totalPages}
         </div>
       )}

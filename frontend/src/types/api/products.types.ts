@@ -4,6 +4,13 @@
  * 
  * These types mirror the OpenAPI specification exactly.
  * DO NOT modify without updating the OpenAPI spec first.
+ * 
+ * Missing Fields (for future backend implementation):
+ * - imageUrl?: string (product image URL)
+ * - discountPercentage?: number (discount percentage for badge)
+ * - oldPrice?: number (original price before discount)
+ * - rating?: number (product rating 0-5)
+ * - reviewCount?: number (number of reviews)
  */
 
 /**
@@ -29,6 +36,13 @@ export interface Product {
   createdAt: string;
   /** ISO 8601 date-time when product was last updated */
   updatedAt: string;
+  
+  // TODO: Add these fields when backend support is ready
+  // imageUrl?: string;
+  // discountPercentage?: number;
+  // oldPrice?: number;
+  // rating?: number;
+  // reviewCount?: number;
 }
 
 /**
