@@ -110,6 +110,13 @@ export function useProductsV2(options?: GetProductsV2Options): UseProductsV2Retu
     };
   }, [currentPage, options?.size, options?.sort, options?.q, refetchTrigger]);
 
+  // Sync currentPage when options.page changes
+  useEffect(() => {
+    if (options?.page !== undefined && options.page !== currentPage) {
+      setCurrentPage(options.page);
+    }
+  }, [options?.page]);
+
   /**
    * Manually trigger a refetch of products
    */

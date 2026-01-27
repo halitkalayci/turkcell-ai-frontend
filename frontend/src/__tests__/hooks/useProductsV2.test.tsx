@@ -1,6 +1,7 @@
 import { useProductsV2 } from '@/hooks/useProductsV2';
 import { renderWithProviders } from '@/test/utils';
 import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { useEffect } from 'react';
 import { describe, expect, test, beforeEach } from 'vitest';
 import { server } from '@/test/setup';
@@ -115,7 +116,7 @@ describe('useProductsV2 hook (v2)', () => {
 
     // Click refetch button
     const refetchButton = screen.getByTestId('refetch-button');
-    refetchButton.click();
+    await userEvent.click(refetchButton);
 
     // Wait for second fetch to complete
     await waitFor(() => {

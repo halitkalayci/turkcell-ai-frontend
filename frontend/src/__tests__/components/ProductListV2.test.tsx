@@ -1,4 +1,5 @@
 import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '@/test/utils';
 import { ProductListV2 } from '@/components/products/ProductListV2';
 import { describe, expect, test, beforeEach } from 'vitest';
@@ -188,7 +189,7 @@ describe('ProductListV2 (v2)', () => {
 
     // Click retry button
     const retryButton = screen.getByRole('button', { name: /try again/i });
-    retryButton.click();
+    await userEvent.click(retryButton);
 
     // Products should load successfully
     await waitFor(() => {

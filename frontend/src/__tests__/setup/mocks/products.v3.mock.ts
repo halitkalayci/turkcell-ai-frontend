@@ -1,0 +1,58 @@
+import type { ProductV3 } from '@/types/api/products.v3.types';
+
+export const mockProductsV3: ProductV3[] = [
+  {
+    id: '1',
+    sku: 'SKU-IPH15-BLK',
+    name: 'iPhone 15 Pro',
+    description: 'Latest Apple flagship with A17 Pro chip',
+    price: 999.99,
+    currency: 'USD',
+    inStock: true,
+    imageUrl: 'https://cdn.example.com/products/SKU-IPH15-BLK.jpg',
+    discountPercent: 10.0,
+    rating: 4.7,
+    category: {
+      id: '1',
+      name: 'Smartphones',
+    },
+    createdAt: '2024-01-15T10:00:00Z',
+    updatedAt: '2024-01-15T10:00:00Z',
+  },
+  {
+    id: '2',
+    sku: 'SKU-GAL-S24',
+    name: 'Samsung Galaxy S24 Ultra',
+    description: 'Premium Android phone with S Pen',
+    price: 1199.99,
+    currency: 'USD',
+    inStock: true,
+    imageUrl: 'https://cdn.example.com/products/SKU-GAL-S24.jpg',
+    discountPercent: 5.0,
+    rating: 4.6,
+    category: {
+      id: '1',
+      name: 'Smartphones',
+    },
+    createdAt: '2024-01-15T10:00:00Z',
+    updatedAt: '2024-01-15T10:00:00Z',
+  },
+  {
+    id: '3',
+    sku: 'SKU-MAC-AIR',
+    name: 'MacBook Air M3',
+    description: 'Lightweight laptop with Apple M3 chip',
+    price: 1299.99,
+    currency: 'USD',
+    inStock: true,
+    imageUrl: 'https://cdn.example.com/products/SKU-MAC-AIR.jpg',
+    discountPercent: 12.0,
+    rating: 4.8,
+    category: {
+      id: '2',
+      name: 'Laptops',
+    },
+    createdAt: '2024-01-15T10:00:00Z',
+    updatedAt: '2024-01-15T10:00:00Z',
+  },
+];

@@ -8,7 +8,8 @@ import { handlers } from './mocks/handlers';
 export const server = setupServer(...handlers);
 
 // Establish API mocking before all tests.
-beforeAll(() => server.listen({ onUnhandledRequest: 'bypass' }));
+// Use 'warn' to catch missing handlers during test development
+beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
 
 // Reset handlers between tests to avoid test cross-talk.
 afterEach(() => server.resetHandlers());

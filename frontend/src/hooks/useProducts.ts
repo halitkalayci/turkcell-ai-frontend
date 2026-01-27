@@ -71,11 +71,11 @@ export function useProducts(options?: GetProductsOptions): UseProductsReturn {
       try {
         setLoading(true);
         setError(null);
-{
+
+        const response: ProductPageResponse = await productService.getAllProducts({
           ...options,
           page: currentPage,
-        }
-        const response: ProductPageResponse = await productService.getAllProducts(options);
+        });
 
         // Only update state if component is still mounted
         if (isMounted) {
@@ -105,7 +105,7 @@ export function useProducts(options?: GetProductsOptions): UseProductsReturn {
     fetchProducts();
 
     // Cleanup function to prevent state updates after unmount
-    recurrentP {
+    return () => {
       isMounted = false;
     };
   }, [options?.page, options?.size, options?.sort, options?.q, refetchTrigger]);
@@ -114,6 +114,9 @@ export function useProducts(options?: GetProductsOptions): UseProductsReturn {
    * Manually trigger a refetch of products
    */
   const refetch = () => {
+    setRefetchTrigger(prev => prev + 1);
+  };
+
   /**
    * Go to specific page (0-indexed)
    */
@@ -149,9 +152,6 @@ export function useProducts(options?: GetProductsOptions): UseProductsReturn {
     refetch,
     goToPage,
     nextPage,
-    prevPageion,
-    loading,
-    error,
-    refetch,
+    prevPage,
   };
 }
