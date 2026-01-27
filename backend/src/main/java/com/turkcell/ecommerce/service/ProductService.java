@@ -1,6 +1,7 @@
 package com.turkcell.ecommerce.service;
 
 import com.turkcell.ecommerce.dto.*;
+import com.turkcell.ecommerce.dto.v2.*;
 import com.turkcell.ecommerce.entity.ProductEntity;
 import com.turkcell.ecommerce.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,23 @@ public class ProductService {
                 .build();
     }
 
+        // V2 list
+        @Transactional(readOnly = true)
+        public ProductPageResponseV2 listProductsV2(Integer page, Integer size, String sort, String q) {
+        Pageable pageable = createPageable(page, size, sort);
+        Page<ProductEntity> productPage = productRepository.findByQuery(q, pageable);
+
+        return ProductPageResponseV2.builder()
+            .items(productPage.getContent().stream()
+                .map(this::toDtoV2)
+                .toList())
+            .page(productPage.getNumber())
+            .size(productPage.getSize())
+            .totalElements(productPage.getTotalElements())
+            .totalPages(productPage.getTotalPages())
+            .build();
+        }
+
     @Transactional
     public ProductResponse createProduct(CreateProductRequest request) {
         ProductEntity entity = ProductEntity.builder()
@@ -52,11 +70,41 @@ public class ProductService {
                 .build();
     }
 
+        // V2 create
+        @Transactional
+        public ProductResponseV2 createProductV2(CreateProductV2Request request) {
+        ProductEntity entity = ProductEntity.builder()
+            .sku(request.getSku())
+            .name(request.getName())
+            .description(request.getDescription())
+            .price(request.getPrice())
+            .currency(request.getCurrency())
+            .inStock(request.getInStock())
+            .imageUrl(request.getImageUrl())
+            .discountPercent(request.getDiscountPercent())
+            .rating(request.getRating())
+            .build();
+
+        ProductEntity saved = productRepository.save(entity);
+        return ProductResponseV2.builder()
+            .product(toDtoV2(saved))
+            .build();
+        }
+
     @Transactional(readOnly = true)
     public ProductResponse getProductById(String id) {
         ProductEntity entity = findProductById(id);
         return ProductResponse.builder()
                 .product(toDto(entity))
+                .build();
+    }
+
+    // V2 get by id
+    @Transactional(readOnly = true)
+    public ProductResponseV2 getProductByIdV2(String id) {
+        ProductEntity entity = findProductById(id);
+        return ProductResponseV2.builder()
+                .product(toDtoV2(entity))
                 .build();
     }
 
@@ -73,6 +121,26 @@ public class ProductService {
         ProductEntity updated = productRepository.save(entity);
         return ProductResponse.builder()
                 .product(toDto(updated))
+                .build();
+    }
+
+    // V2 replace
+    @Transactional
+    public ProductResponseV2 replaceProductV2(String id, UpdateProductV2Request request) {
+        ProductEntity entity = findProductById(id);
+        entity.setSku(request.getSku());
+        entity.setName(request.getName());
+        entity.setDescription(request.getDescription());
+        entity.setPrice(request.getPrice());
+        entity.setCurrency(request.getCurrency());
+        entity.setInStock(request.getInStock());
+        entity.setImageUrl(request.getImageUrl());
+        entity.setDiscountPercent(request.getDiscountPercent());
+        entity.setRating(request.getRating());
+
+        ProductEntity updated = productRepository.save(entity);
+        return ProductResponseV2.builder()
+                .product(toDtoV2(updated))
                 .build();
     }
 
@@ -105,6 +173,45 @@ public class ProductService {
                 .build();
     }
 
+    // V2 patch
+    @Transactional
+    public ProductResponseV2 patchProductV2(String id, PatchProductV2Request request) {
+        ProductEntity entity = findProductById(id);
+
+        if (request.getSku() != null) {
+            entity.setSku(request.getSku());
+        }
+        if (request.getName() != null) {
+            entity.setName(request.getName());
+        }
+        if (request.getDescription() != null) {
+            entity.setDescription(request.getDescription());
+        }
+        if (request.getPrice() != null) {
+            entity.setPrice(request.getPrice());
+        }
+        if (request.getCurrency() != null) {
+            entity.setCurrency(request.getCurrency());
+        }
+        if (request.getInStock() != null) {
+            entity.setInStock(request.getInStock());
+        }
+        if (request.getImageUrl() != null) {
+            entity.setImageUrl(request.getImageUrl());
+        }
+        if (request.getDiscountPercent() != null) {
+            entity.setDiscountPercent(request.getDiscountPercent());
+        }
+        if (request.getRating() != null) {
+            entity.setRating(request.getRating());
+        }
+
+        ProductEntity updated = productRepository.save(entity);
+        return ProductResponseV2.builder()
+                .product(toDtoV2(updated))
+                .build();
+    }
+
     @Transactional
     public void deleteProduct(String id) {
         ProductEntity entity = findProductById(id);
@@ -132,6 +239,23 @@ public class ProductService {
                 .price(entity.getPrice())
                 .currency(entity.getCurrency())
                 .inStock(entity.getInStock())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .build();
+    }
+
+    private ProductV2 toDtoV2(ProductEntity entity) {
+        return ProductV2.builder()
+                .id("prd_" + entity.getId())
+                .sku(entity.getSku())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .price(entity.getPrice())
+                .currency(entity.getCurrency())
+                .inStock(entity.getInStock())
+                .imageUrl(entity.getImageUrl())
+                .discountPercent(entity.getDiscountPercent())
+                .rating(entity.getRating())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .build();

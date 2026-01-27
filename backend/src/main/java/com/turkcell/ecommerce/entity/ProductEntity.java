@@ -36,6 +36,13 @@ public class ProductEntity {
     @Column(nullable = false)
     private Boolean inStock;
 
+    // V2 fields
+    private String imageUrl;
+
+    private Double discountPercent;
+
+    private Double rating;
+
     @Column(nullable = false, updatable = false)
     private OffsetDateTime createdAt;
 
