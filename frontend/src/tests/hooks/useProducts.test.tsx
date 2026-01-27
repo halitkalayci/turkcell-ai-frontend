@@ -2,6 +2,7 @@ import { useProducts } from '@/hooks/useProducts';
 import { renderWithProviders } from '@/test/utils';
 import { screen } from '@testing-library/react';
 import { useEffect } from 'react';
+import { describe, expect, test } from 'vitest';
 
 function HookConsumer() {
   const { products, loading, error } = useProducts({ page: 0, size: 10 });

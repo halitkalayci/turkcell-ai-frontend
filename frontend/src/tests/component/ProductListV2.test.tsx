@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from '@/test/utils';
 import { ProductListV2 } from '@/components/products/ProductListV2';
+import { describe, expect, test } from 'vitest';
 
 describe('ProductListV2 (v2)', () => {
   test('renders v2 products from MSW', async () => {
