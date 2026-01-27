@@ -10,4 +10,25 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['src/test/setup.ts'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html', 'lcov'],
+      lines: 80,
+      functions: 80,
+      branches: 80,
+      statements: 80,
+      exclude: [
+        'src/main.tsx',
+        'src/App.tsx',
+        'src/**/*.d.ts',
+        'src/types/**/*',
+        'src/**/index.ts',
+      ],
+    },
+    include: ['src/tests/**/*.test.{ts,tsx}'],
+  },
 })
