@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.25% </span>
+                <span class="strong">30.37% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>26/135</span>
+                <span class='fraction'>41/135</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">81.81% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/8</span>
+                <span class='fraction'>9/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>3/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.25% </span>
+                <span class="strong">30.37% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>26/135</span>
+                <span class='fraction'>41/135</span>
             </div>
         
             
@@ -305,22 +305,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -520,23 +520,23 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
 /**
  * Custom error class for HTTP errors
  */
-export class HttpError extends Error <span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >{</span></span>
-<span class="cstat-no" title="statement not covered" >  status: number;</span>
-<span class="cstat-no" title="statement not covered" >  statusText: string;</span>
-<span class="cstat-no" title="statement not covered" >  errorResponse?: ErrorResponse;</span>
+export class HttpError extends Error {
+  status: number;
+  statusText: string;
+  errorResponse?: ErrorResponse;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  constructor(</span>
-<span class="cstat-no" title="statement not covered" >    status: number,</span>
-<span class="cstat-no" title="statement not covered" >    statusText: string,</span>
-<span class="cstat-no" title="statement not covered" >    errorResponse?: ErrorResponse</span>
-<span class="cstat-no" title="statement not covered" >  ) {</span>
-<span class="cstat-no" title="statement not covered" >    super(errorResponse?.message || statusText);</span>
-<span class="cstat-no" title="statement not covered" >    this.name = 'HttpError';</span>
-<span class="cstat-no" title="statement not covered" >    this.status = status;</span>
-<span class="cstat-no" title="statement not covered" >    this.statusText = statusText;</span>
-<span class="cstat-no" title="statement not covered" >    this.errorResponse = errorResponse;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+  constructor(
+    status: number,
+    statusText: string,
+    errorResponse?: ErrorResponse
+  ) {
+    super(errorResponse?.message || statusText);
+    this.name = 'HttpError';
+    this.status = status;
+    this.statusText = statusText;
+    this.errorResponse = errorResponse;
+  }
+}
 &nbsp;
 /**
  * HTTP Client with typed methods
@@ -718,7 +718,7 @@ export const httpClient = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-27T08:45:43.413Z
+                at 2026-01-27T10:46:19.017Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
