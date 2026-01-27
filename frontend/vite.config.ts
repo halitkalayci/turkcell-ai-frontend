@@ -29,6 +29,6 @@ export default defineConfig({
         'src/**/index.ts',
       ],
     },
-    include: ['src/tests/**/*.test.{ts,tsx}'],
+    include: ['src/__tests__/**/*.test.{ts,tsx}'],
   },
 })
