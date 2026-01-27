@@ -61,8 +61,8 @@ describe('ProductListV2 (v2)', () => {
     // Wait for products to load
     await screen.findByText('iPhone 15');
 
-    // Rating should be formatted (ceil rounded)
-    expect(screen.getByText('5/5')).toBeInTheDocument(); // 4.5 → 5
+    // Rating should be formatted (ceil rounded) - getAllByText since rating appears multiple times
+    expect(screen.getAllByText('5/5')[0]).toBeInTheDocument(); // 4.5 → 5
   });
 
   test('shows discount badge when applicable', async () => {

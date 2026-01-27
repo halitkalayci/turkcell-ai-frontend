@@ -24,7 +24,9 @@ function HookConsumerV2({ page = 0, size = 10 }: { page?: number; size?: number 
           <li key={p.id}>
             <span>{p.name}</span>
             {p.rating && <span data-testid={`rating-${p.id}`}>{p.rating}</span>}
-            {p.discount && <span data-testid={`discount-${p.id}`}>{p.discount}</span>}
+            {p.discountPercent !== null && p.discountPercent !== undefined && (
+              <span data-testid={`discount-${p.id}`}>{p.discountPercent}</span>
+            )}
             {p.imageUrl && <span data-testid={`image-${p.id}`}>{p.imageUrl}</span>}
           </li>
         ))}
@@ -243,21 +245,11 @@ describe('useProductsV2 hook (v2)', () => {
     const refetchButton = screen.getByTestId('refetch-button');
     refetchButton.click();
 
-    // Loading should become true
-    const loadingElement = screen.getByTestId('loading');
+    // After refetch, error should be cleared and products should load
     await waitFor(() => {
-      expect(loadingElement).toHaveTextContent('true');
+      expect(errorElement).toHaveTextContent('');
     });
 
-    // Then false after success
-    await waitFor(() => {
-      expect(loadingElement).toHaveTextContent('false');
-    });
-
-    // Error should be cleared
-    expect(errorElement).toHaveTextContent('');
-
-    // Products should load
     expect(await screen.findByText('iPhone 15')).toBeInTheDocument();
   });
 

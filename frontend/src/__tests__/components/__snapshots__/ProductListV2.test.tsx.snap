@@ -170,6 +170,11 @@ exports[`ProductListV2 (v2) > matches snapshot for product grid layout 1`] = `
         <div
           class="relative w-full h-64 bg-gray-100"
         >
+          <div
+            class="absolute top-3 left-3 bg-gray-900 text-white text-xs font-semibold px-3 py-1 rounded-md"
+          >
+            10% OFF
+          </div>
           <img
             alt="Pixel 9"
             class="w-full h-full object-cover"

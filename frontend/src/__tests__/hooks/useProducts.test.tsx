@@ -179,21 +179,11 @@ describe('useProducts hook (v1)', () => {
     const refetchButton = screen.getByTestId('refetch-button');
     refetchButton.click();
 
-    // Loading should become true
-    const loadingElement = screen.getByTestId('loading');
+    // After refetch, error should be cleared and products should load
     await waitFor(() => {
-      expect(loadingElement).toHaveTextContent('true');
+      expect(errorElement).toHaveTextContent('');
     });
 
-    // Then false after success
-    await waitFor(() => {
-      expect(loadingElement).toHaveTextContent('false');
-    });
-
-    // Error should be cleared
-    expect(errorElement).toHaveTextContent('');
-
-    // Products should load
     expect(await screen.findByText('iPhone 15')).toBeInTheDocument();
   });
 

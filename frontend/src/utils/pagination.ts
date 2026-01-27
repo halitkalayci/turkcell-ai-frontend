@@ -94,12 +94,18 @@ export function generatePageRange(
  * @example
  * formatPaginationInfo(0, 10, 25) // "Showing 1-10 of 25"
  * formatPaginationInfo(2, 10, 25) // "Showing 21-25 of 25"
+ * formatPaginationInfo(0, 10, 0) // "Showing 0-0 of 0"
  */
 export function formatPaginationInfo(
   page: number,
   size: number,
   totalElements: number
 ): string {
+  // Handle zero items case
+  if (totalElements === 0) {
+    return `Showing 0-0 of 0`;
+  }
+  
   const start = calculatePageStartIndex(page, size);
   const end = calculatePageEndIndex(page, size, totalElements);
   return `Showing ${start}-${end} of ${totalElements}`;

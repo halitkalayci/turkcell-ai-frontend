@@ -62,8 +62,14 @@ export function formatDate(date: string | Date): string {
  * @example
  * formatRating(3.2) // '4/5'
  * formatRating(4.7) // '5/5'
+ * formatRating(NaN) // '0/5'
  */
 export function formatRating(value: number, max: number = MAX_RATING): string {
+  // Handle NaN input
+  if (Number.isNaN(value)) {
+    return `0/${max}`;
+  }
+  
   const roundedUp = Math.ceil(value);
   const clamped = Math.min(Math.max(roundedUp, 0), max);
   return `${clamped}/${max}`;
