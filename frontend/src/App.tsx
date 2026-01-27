@@ -4,7 +4,7 @@
  */
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ProductsPageV2 } from './pages/ProductsPageV2';
+import { ProductsPageV3 } from './pages/ProductsPageV3';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Navigate to="/products" replace />} />
         
         {/* Products page */}
-        <Route path="/products" element={<ProductsPageV2 />} />
+        <Route path="/products" element={<ProductsPageV3 />} />
         
         {/* Future routes can be added here */}
         {/* <Route path="/products/:id" element={<ProductDetailPage />} /> */}

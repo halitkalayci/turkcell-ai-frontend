@@ -33,6 +33,12 @@ export interface UseProductsV2Return {
   error: string | null;
   /** Manually trigger refetch */
   refetch: () => void;
+  /** Go to specific page (0-indexed) */
+  goToPage: (page: number) => void;
+  /** Go to next page */
+  nextPage: () => void;
+  /** Go to previous page */
+  prevPage: () => void;
 }
 
 /**
@@ -56,6 +62,7 @@ export function useProductsV2(options?: GetProductsV2Options): UseProductsV2Retu
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [refetchTrigger, setRefetchTrigger] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(options?.page || 0);
 
   useEffect(() => {
     let isMounted = true;
@@ -65,7 +72,10 @@ export function useProductsV2(options?: GetProductsV2Options): UseProductsV2Retu
         setLoading(true);
         setError(null);
 
-        const response: ProductPageResponseV2 = await productV2Service.getAllProductsV2(options);
+        const response: ProductPageResponseV2 = await productV2Service.getAllProductsV2({
+          ...options,
+          page: currentPage,
+        });
 
         // Only update state if component is still mounted
         if (isMounted) {
@@ -98,7 +108,7 @@ export function useProductsV2(options?: GetProductsV2Options): UseProductsV2Retu
     return () => {
       isMounted = false;
     };
-  }, [options?.page, options?.size, options?.sort, options?.q, refetchTrigger]);
+  }, [currentPage, options?.size, options?.sort, options?.q, refetchTrigger]);
 
   /**
    * Manually trigger a refetch of products
@@ -107,11 +117,41 @@ export function useProductsV2(options?: GetProductsV2Options): UseProductsV2Retu
     setRefetchTrigger(prev => prev + 1);
   };
 
+  /**
+   * Go to specific page (0-indexed)
+   */
+  const goToPage = (page: number) => {
+    if (page >= 0 && (!pagination || page < pagination.totalPages)) {
+      setCurrentPage(page);
+    }
+  };
+
+  /**
+   * Go to next page
+   */
+  const nextPage = () => {
+    if (pagination && currentPage < pagination.totalPages - 1) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+
+  /**
+   * Go to previous page
+   */
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
+
   return {
     products,
     pagination,
     loading,
     error,
     refetch,
+    goToPage,
+    nextPage,
+    prevPage,
   };
 }

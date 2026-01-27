@@ -10,7 +10,7 @@ import type { ProductV3 } from '@/types/api/products.v3.types';
 export function ProductListV3() {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
   
-  const { products, loading, error, page, totalPages } = useProductsV3({
+  const { products, loading, error, page, totalPages, goToPage, nextPage, prevPage } = useProductsV3({
     page: 0,
     size: 12,
     categoryId: selectedCategoryId || undefined,
@@ -61,10 +61,66 @@ export function ProductListV3() {
             ))}
           </div>
 
-          {/* Pagination Info */}
-          <div className="mt-8 text-center text-sm text-gray-600">
-            Page {page + 1} of {totalPages}
-          </div>
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="mt-8 flex items-center justify-center gap-2">
+              {/* Previous Button */}
+              <button
+                onClick={prevPage}
+                disabled={page === 0}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                aria-label="Previous page"
+              >
+                Previous
+              </button>
+
+              {/* Page Numbers */}
+              <div className="flex gap-1">
+                {Array.from({ length: totalPages }, (_, i) => {
+                  // Show first page, last page, current page, and pages around current
+                  const isFirstPage = i === 0;
+                  const isLastPage = i === totalPages - 1;
+                  const isCurrentPage = i === page;
+                  const isNearCurrent = Math.abs(i - page) <= 1;
+
+                  if (isFirstPage || isLastPage || isCurrentPage || isNearCurrent) {
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => goToPage(i)}
+                        className={`min-w-[40px] px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
+                          isCurrentPage
+                            ? 'bg-blue-600 text-white'
+                            : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                        }`}
+                        aria-label={`Go to page ${i + 1}`}
+                        aria-current={isCurrentPage ? 'page' : undefined}
+                      >
+                        {i + 1}
+                      </button>
+                    );
+                  } else if (i === page - 2 || i === page + 2) {
+                    return (
+                      <span key={i} className="px-2 py-2 text-gray-500">
+                        ...
+                      </span>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+
+              {/* Next Button */}
+              <button
+                onClick={nextPage}
+                disabled={page === totalPages - 1}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                aria-label="Next page"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </>
       )}
     </div>

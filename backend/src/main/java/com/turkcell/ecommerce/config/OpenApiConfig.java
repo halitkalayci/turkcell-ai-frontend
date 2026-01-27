@@ -20,8 +20,8 @@ public class OpenApiConfig {
                         .description("Contract-first Products CRUD API (v1)"))
                 .servers(List.of(
                         new Server()
-                                .url("/api/v1")
-                                .description("API v1 Base URL")
+                                .url("http://localhost:8080")
+                                .description("API Base URL")
                 ));
     }
 }

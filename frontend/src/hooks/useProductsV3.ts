@@ -20,6 +20,9 @@ interface UseProductsV3State {
   loading: boolean;
   error: string | null;
   refetch: () => void;
+  goToPage: (page: number) => void;
+  nextPage: () => void;
+  prevPage: () => void;
 }
 
 /**
@@ -34,8 +37,8 @@ export function useProductsV3(options: UseProductsV3Options = {}): UseProductsV3
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [refetchTrigger, setRefetchTrigger] = useState(0);
+  const [currentPage, setCurrentPage] = useState<number>(options.page || 0);
 
-  const pageNum = options.page ?? 0;
   const pageSize = options.size ?? 10;
   const sortParam = options.sort;
   const queryParam = options.query;
@@ -50,7 +53,7 @@ export function useProductsV3(options: UseProductsV3Options = {}): UseProductsV3
         setError(null);
 
         const params: ListProductsV3Params = {
-          page: pageNum,
+          page: currentPage,
           size: pageSize,
         };
 
@@ -83,10 +86,28 @@ export function useProductsV3(options: UseProductsV3Options = {}): UseProductsV3
     return () => {
       isMounted = false;
     };
-  }, [pageNum, pageSize, sortParam, queryParam, categoryIdParam, refetchTrigger]);
+  }, [currentPage, pageSize, sortParam, queryParam, categoryIdParam, refetchTrigger]);
 
   const refetch = () => {
     setRefetchTrigger((prev) => prev + 1);
+  };
+
+  const goToPage = (page: number) => {
+    if (page >= 0 && page < totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const nextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage((prev) => prev - 1);
+    }
   };
 
   return {
@@ -98,5 +119,8 @@ export function useProductsV3(options: UseProductsV3Options = {}): UseProductsV3
     loading,
     error,
     refetch,
+    goToPage,
+    nextPage,
+    prevPage,
   };
 }
