@@ -100,3 +100,22 @@ export const MAX_PRODUCT_DESCRIPTION_LENGTH = 2000;
  * Minimum product price
  */
 export const MIN_PRODUCT_PRICE = 0;
+
+// =============================================================================
+// Product Display
+// =============================================================================
+
+/**
+ * Maximum rating value for star renderings (0-5 scale)
+ */
+export const MAX_RATING = 5;
+
+/**
+ * Maximum discount percentage allowed (0-100)
+ */
+export const MAX_DISCOUNT_PERCENT = 100;
+
+/**
+ * Default placeholder image URL for products without image
+ */
+export const DEFAULT_PRODUCT_IMAGE = 'https://cdn.example.com/products/placeholder.jpg';

@@ -5,6 +5,8 @@
  * These utilities are framework-agnostic and easily testable.
  */
 
+import { MAX_RATING } from './constants';
+
 /**
  * Truncate text with ellipsis
  * 
@@ -48,4 +50,36 @@ export function formatPrice(price: number, currency: string): string {
  */
 export function formatDate(date: string | Date): string {
   return new Date(date).toLocaleDateString();
+}
+
+/**
+ * Format rating as "X/Y" with ceiling rounding
+ * 
+ * @param value - The rating value (0-5)
+ * @param max - Maximum rating value (default: MAX_RATING)
+ * @returns Formatted rating string
+ * 
+ * @example
+ * formatRating(3.2) // '4/5'
+ * formatRating(4.7) // '5/5'
+ */
+export function formatRating(value: number, max: number = MAX_RATING): string {
+  const roundedUp = Math.ceil(value);
+  const clamped = Math.min(Math.max(roundedUp, 0), max);
+  return `${clamped}/${max}`;
+}
+
+/**
+ * Format discount percentage as badge-friendly text
+ * 
+ * @param percent - Discount percentage (0-100)
+ * @returns Formatted discount string
+ * 
+ * @example
+ * formatDiscount(10) // '10% OFF'
+ * formatDiscount(25.5) // '26% OFF'
+ */
+export function formatDiscount(percent: number): string {
+  const rounded = Math.round(percent);
+  return `${rounded}% OFF`;
 }
