@@ -43,6 +43,11 @@ public class ProductEntity {
 
     private Double rating;
 
+    // V3 field - Category relationship
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
+    private CategoryEntity category;
+
     @Column(nullable = false, updatable = false)
     private OffsetDateTime createdAt;
 

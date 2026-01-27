@@ -1,17 +1,30 @@
--- 15 Sample Products
-INSERT INTO products (sku, name, description, price, currency, in_stock, image_url, discount_percent, rating, created_at, updated_at) VALUES
-('SKU-IPH15-BLK', 'iPhone 15 Pro', 'Latest Apple flagship with A17 Pro chip and titanium design', 999.99, 'USD', true, 'https://cdn.example.com/products/SKU-IPH15-BLK.jpg', 10.0, 4.7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-GAL-S24', 'Samsung Galaxy S24 Ultra', 'Premium Android phone with S Pen and 200MP camera', 1199.99, 'USD', true, 'https://cdn.example.com/products/SKU-GAL-S24.jpg', 5.0, 4.6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-MAC-AIR', 'MacBook Air M3', 'Lightweight laptop with Apple M3 chip, 13-inch display', 1299.99, 'USD', true, 'https://cdn.example.com/products/SKU-MAC-AIR.jpg', 12.0, 4.8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-PS5-STD', 'PlayStation 5', 'Next-gen gaming console with 4K gaming and DualSense controller', 499.99, 'USD', true, 'https://cdn.example.com/products/SKU-PS5-STD.jpg', 0.0, 4.9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-AIRPOD-PRO', 'AirPods Pro 2nd Gen', 'Active noise cancellation earbuds with spatial audio', 249.99, 'USD', true, 'https://cdn.example.com/products/SKU-AIRPOD-PRO.jpg', 15.0, 4.4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-WATCH-S9', 'Apple Watch Series 9', 'Advanced fitness and health tracking smartwatch', 399.99, 'USD', false, 'https://cdn.example.com/products/SKU-WATCH-S9.jpg', 8.0, 4.3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-IPAD-AIR', 'iPad Air M2', 'Powerful tablet with M2 chip, 11-inch Liquid Retina display', 599.99, 'USD', true, 'https://cdn.example.com/products/SKU-IPAD-AIR.jpg', 10.0, 4.5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-SONY-WH', 'Sony WH-1000XM5', 'Industry-leading noise canceling headphones', 399.99, 'USD', true, 'https://cdn.example.com/products/SKU-SONY-WH.jpg', 20.0, 4.7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-KINDLE-PW', 'Kindle Paperwhite', 'Waterproof e-reader with adjustable warm light', 139.99, 'USD', true, 'https://cdn.example.com/products/SKU-KINDLE-PW.jpg', 5.0, 4.2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-ECHO-DOT', 'Echo Dot 5th Gen', 'Smart speaker with Alexa voice assistant', 49.99, 'USD', true, 'https://cdn.example.com/products/SKU-ECHO-DOT.jpg', 0.0, 4.1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-LOGITECH-MX', 'Logitech MX Master 3S', 'Advanced wireless mouse for productivity', 99.99, 'USD', false, 'https://cdn.example.com/products/SKU-LOGITECH-MX.jpg', 7.5, 4.6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-KEYCHRON-K8', 'Keychron K8 Mechanical Keyboard', 'Wireless mechanical keyboard with hot-swappable switches', 89.99, 'USD', true, 'https://cdn.example.com/products/SKU-KEYCHRON-K8.jpg', 12.5, 4.3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-MONITOR-LG', 'LG UltraWide 34"', '34-inch curved ultrawide monitor with QHD resolution', 499.99, 'USD', true, 'https://cdn.example.com/products/SKU-MONITOR-LG.jpg', 10.0, 4.4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-WEBCAM-LOGI', 'Logitech C920 HD Pro', '1080p HD webcam for video conferencing', 79.99, 'USD', true, 'https://cdn.example.com/products/SKU-WEBCAM-LOGI.jpg', 18.0, 4.2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('SKU-SWITCH-OLED', 'Nintendo Switch OLED', 'Handheld gaming console with vibrant OLED screen', 349.99, 'USD', false, 'https://cdn.example.com/products/SKU-SWITCH-OLED.jpg', 0.0, 4.8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- Categories (10 categories)
+INSERT INTO categories (name, created_at, updated_at) VALUES
+('Smartphones', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Laptops', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Tablets', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Gaming', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Audio', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Wearables', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('E-Readers', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Smart Home', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Accessories', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Monitors', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- 15 Sample Products (with category_id)
+INSERT INTO products (sku, name, description, price, currency, in_stock, image_url, discount_percent, rating, category_id, created_at, updated_at) VALUES
+('SKU-IPH15-BLK', 'iPhone 15 Pro', 'Latest Apple flagship with A17 Pro chip and titanium design', 999.99, 'USD', true, 'https://cdn.example.com/products/SKU-IPH15-BLK.jpg', 10.0, 4.7, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-GAL-S24', 'Samsung Galaxy S24 Ultra', 'Premium Android phone with S Pen and 200MP camera', 1199.99, 'USD', true, 'https://cdn.example.com/products/SKU-GAL-S24.jpg', 5.0, 4.6, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-MAC-AIR', 'MacBook Air M3', 'Lightweight laptop with Apple M3 chip, 13-inch display', 1299.99, 'USD', true, 'https://cdn.example.com/products/SKU-MAC-AIR.jpg', 12.0, 4.8, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-PS5-STD', 'PlayStation 5', 'Next-gen gaming console with 4K gaming and DualSense controller', 499.99, 'USD', true, 'https://cdn.example.com/products/SKU-PS5-STD.jpg', 0.0, 4.9, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-AIRPOD-PRO', 'AirPods Pro 2nd Gen', 'Active noise cancellation earbuds with spatial audio', 249.99, 'USD', true, 'https://cdn.example.com/products/SKU-AIRPOD-PRO.jpg', 15.0, 4.4, 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-WATCH-S9', 'Apple Watch Series 9', 'Advanced fitness and health tracking smartwatch', 399.99, 'USD', false, 'https://cdn.example.com/products/SKU-WATCH-S9.jpg', 8.0, 4.3, 6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-IPAD-AIR', 'iPad Air M2', 'Powerful tablet with M2 chip, 11-inch Liquid Retina display', 599.99, 'USD', true, 'https://cdn.example.com/products/SKU-IPAD-AIR.jpg', 10.0, 4.5, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-SONY-WH', 'Sony WH-1000XM5', 'Industry-leading noise canceling headphones', 399.99, 'USD', true, 'https://cdn.example.com/products/SKU-SONY-WH.jpg', 20.0, 4.7, 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-KINDLE-PW', 'Kindle Paperwhite', 'Waterproof e-reader with adjustable warm light', 139.99, 'USD', true, 'https://cdn.example.com/products/SKU-KINDLE-PW.jpg', 5.0, 4.2, 7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-ECHO-DOT', 'Echo Dot 5th Gen', 'Smart speaker with Alexa voice assistant', 49.99, 'USD', true, 'https://cdn.example.com/products/SKU-ECHO-DOT.jpg', 0.0, 4.1, 8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-LOGITECH-MX', 'Logitech MX Master 3S', 'Advanced wireless mouse for productivity', 99.99, 'USD', false, 'https://cdn.example.com/products/SKU-LOGITECH-MX.jpg', 7.5, 4.6, 9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-KEYCHRON-K8', 'Keychron K8 Mechanical Keyboard', 'Wireless mechanical keyboard with hot-swappable switches', 89.99, 'USD', true, 'https://cdn.example.com/products/SKU-KEYCHRON-K8.jpg', 12.5, 4.3, 9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-MONITOR-LG', 'LG UltraWide 34"', '34-inch curved ultrawide monitor with QHD resolution', 499.99, 'USD', true, 'https://cdn.example.com/products/SKU-MONITOR-LG.jpg', 10.0, 4.4, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-WEBCAM-LOGI', 'Logitech C920 HD Pro', '1080p HD webcam for video conferencing', 79.99, 'USD', true, 'https://cdn.example.com/products/SKU-WEBCAM-LOGI.jpg', 18.0, 4.2, 9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('SKU-SWITCH-OLED', 'Nintendo Switch OLED', 'Handheld gaming console with vibrant OLED screen', 349.99, 'USD', false, 'https://cdn.example.com/products/SKU-SWITCH-OLED.jpg', 0.0, 4.8, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

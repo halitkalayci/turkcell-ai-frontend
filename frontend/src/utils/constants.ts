@@ -101,6 +101,16 @@ export const MAX_PRODUCT_DESCRIPTION_LENGTH = 2000;
  */
 export const MIN_PRODUCT_PRICE = 0;
 
+/**
+ * Minimum category name length
+ */
+export const MIN_CATEGORY_NAME_LENGTH = 2;
+
+/**
+ * Maximum category name length
+ */
+export const MAX_CATEGORY_NAME_LENGTH = 50;
+
 // =============================================================================
 // Product Display
 // =============================================================================

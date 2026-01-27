@@ -15,4 +15,25 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
             "(:query IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
             "LOWER(p.description) LIKE LOWER(CONCAT('%', :query, '%')))")
     Page<ProductEntity> findByQuery(@Param("query") String query, Pageable pageable);
+
+    /**
+     * Check if any products exist for a category (for delete protection)
+     */
+    boolean existsByCategoryId(Long categoryId);
+
+    /**
+     * Find products by category ID with pagination
+     */
+    Page<ProductEntity> findByCategoryId(Long categoryId, Pageable pageable);
+
+    /**
+     * Find products by query and category ID
+     */
+    @Query("SELECT p FROM ProductEntity p WHERE " +
+            "(:categoryId IS NULL OR p.category.id = :categoryId) AND " +
+            "(:query IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(p.description) LIKE LOWER(CONCAT('%', :query, '%')))")
+    Page<ProductEntity> findByQueryAndCategoryId(@Param("query") String query,
+                                                   @Param("categoryId") Long categoryId,
+                                                   Pageable pageable);
 }
