@@ -118,4 +118,4 @@ export const MAX_DISCOUNT_PERCENT = 100;
 /**
  * Default placeholder image URL for products without image
  */
-export const DEFAULT_PRODUCT_IMAGE = 'https://cdn.example.com/products/placeholder.jpg';
+export const DEFAULT_PRODUCT_IMAGE = 'https://placehold.co/600x400/EEE/31343C';
